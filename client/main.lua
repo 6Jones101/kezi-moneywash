@@ -33,7 +33,16 @@ function openwasher()
             break
         end
     end
-
+    
+    if not currentLocation then
+        lib.notify({
+            title = 'Moneywash | Error',
+            description = 'Location not found',
+            type = 'info',
+            position = 'top'
+        })
+        return
+    end
   
 
     local tax = currentLocation.tax
@@ -54,6 +63,12 @@ function openwasher()
             print(tonumber(amounttobegivenincash))
             local playerCoords = GetEntityCoords(PlayerPedId())
             TriggerServerEvent('kezi:moneywash', amounttobegivenincash, playerCoords)
+            lib.notify({
+                title = 'Washing | Success',
+                description =  "You have washed $" .. input[1] .. " , in 30 seconds you will get "  .." $".. tonumber(amounttobegivenincash) .. " cash",
+                type = 'success',
+                position = 'top'
+            })
        
         else 
             print("Oh no")
@@ -64,6 +79,12 @@ function openwasher()
         local amounttobegivenincash = input[1] - bidentax
         local playerCoords = GetEntityCoords(PlayerPedId())
         TriggerServerEvent('kezi:moneywash', input[1], playerCoords)
+        lib.notify({
+            title = 'Washing | Success',
+            description = "You have washed $" .. input[1] .. " , in 30 seconds you will get "  .." $".. tonumber(amounttobegivenincash) .. " cash",
+            type = 'success',
+            position = 'top'
+        })
     
     end
 end 
